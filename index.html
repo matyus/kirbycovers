@@ -1,0 +1,436 @@
+
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+  <head> 
+    <link rel="shortcut icon" href="{Favicon}" />
+    {block:Description}
+      <meta name="description" content="{MetaDescription}" />
+    {/block:Description}
+    <title>
+      {Title}
+
+      {block:SearchPage}: 
+        {lang:Search results for SearchQuery}
+      {/block:SearchPage}
+
+      {block:PostSummary}: 
+        {PostSummary}
+      {/block:PostSummary}
+    </title>
+    <!-- Default values -->
+    <meta name="text:Header slogan" content="is a tumblelog." />
+    <meta name="color:Background" content="#EFEFEF"/>
+    <meta name="color:Link" content="#444444"/>
+    <meta name="color:Link hover" content="#444444"/>
+    <meta name="font:Body" content="Georgia, serif"/>
+    <meta name="font:Date" content="Helvetica, Arial, sans-serif"/>
+    <meta name="if:Show notes" content="0">
+    <meta name="if:Show album art on audio posts" content="1" />
+    <meta name="text:Disqus Shortname" content="" />
+    <meta name="if:Show comment count on frontpage" content="0" />
+
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu:500,300" rel="stylesheet" type="text/css">
+    
+    <style type="text/css">
+      * {
+        -webkit-box-sizing: border-box; /* <=iOS4, <= Android  2.3 */
+        -moz-box-sizing: border-box; /* FF1+ */
+        box-sizing: border-box; /* Chrome, IE8, Opera, Safari 5.1*/
+      }
+
+      body {
+        background-color: #efefef;
+        color: #444;
+        font-family: 'Ubuntu',Arial,sans-serif;
+        font-size: 12px;
+        font-weight: 300;
+      }
+
+      a,
+      a:link,
+      a:visited {
+        color: #444;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: #444;
+        text-decoration: underline;
+      }
+
+      strong,
+      b {
+        font-weight: 500;
+      }
+
+      .main {
+        margin: 0 auto;
+        width: 728px;
+      }
+
+      .main-header {
+        margin-bottom: 1em;
+        margin-top: 50px;
+      }
+
+      .main-logotype {
+        float: left;
+        font-size: 16px;
+        font-weight: 500;
+        margin-left: 10px;
+      }
+
+      .main-nav {
+        margin-right: 10px;
+      }
+
+      .main-nav-list {
+      }
+
+      .main-nav-item {
+        display: inline;
+        font-size: 13px;
+        margin-top: 2em;
+      }
+
+      .main-nav-link {
+        display: block;
+        float: right;
+        margin-top: 1em;
+        padding-right: 1em;
+      }
+
+      .main-nav-item:first-child .main-nav-link {
+        padding-right: 0;
+      }
+
+      .main-rule {
+        background: #c0c0c0;
+        border: none;
+        height: 1px;
+        width: 100%;
+      }
+
+      .main-menu-list,
+      .main-nav-list,
+      .footer-nav,
+      .posts {
+        margin: 0;
+        padding: 0;
+      }
+
+      .main-menu-item,
+      .main-nav-item,
+      .footer-nav-item {
+        display: inline;
+        list-style-type: none;
+        padding-right: 1em;
+      }
+
+      .main-menu {
+        margin: 0 10px;
+      }
+
+      .main-menu-item {
+        font-size: 11px;
+        line-height: 3;
+      }
+
+      .main-menu-list {
+        font-size: 13px;
+      }
+
+      .body {
+        margin: 0px;
+      }
+      .post {
+        width: 100%;
+      }
+
+      .post-image,
+      .post-text {
+        padding: 0 10px 20px;
+      }
+
+      .post-image p,
+      .posts-item p,
+      .post-image > p { 
+        font-size: 11px;
+        line-height:1.231;
+        margin: 0.25em 0 0;
+      }
+
+      .post-text > p {
+        margin: 1em 0;
+      }
+
+      .post-text > p > img {
+        width: 100%;
+        height: auto;
+      }
+
+      .post-text {
+
+      }
+
+      .post-image-src {
+        width: 708px;
+      }
+
+      .posts {
+        padding-left: 0;
+      }
+
+      .posts-list {
+        padding: 0 10px;
+      }
+
+      .posts-item {
+        float: left;
+        height: 300px;
+        list-style-type: none;
+        overflow: hidden;
+        padding-right:15px;
+        width: 25%;
+      }
+
+      .posts-item-image {
+        width: 162px;
+        height: 236px;
+      }
+
+      .post-tags {
+        font-size: 11px;
+        margin: 1em 0 0;
+        padding: 0;
+      }
+
+      .post-tags-item {
+        display: inline;
+        list-style-type: none;
+        padding-right: 0.5em;
+      }
+
+      .post-tags-item,
+      .post-tags-link:link,
+      .post-tags-link:active,
+      .post-tags-link:hover,
+      .post-tags-link:visited,
+      .post-notes-count {
+        color: #999;
+      }
+
+      .pages {
+        margin: 0 auto;
+      }
+
+      .footer { 
+        color: #999;
+        font-size: 11px;
+        margin: 20px 10px 10px;
+      }
+
+      .footer a,
+      .footer a:link,
+      .footer a:hover,
+      .footer a:visited {
+        color: #999;
+      }
+
+      .clearfix:before,
+      .clearfix:after {
+        content: "";
+        display: table;
+      }
+
+      .clearfix:after {
+        clear: both;
+      }
+
+      .clearfix {
+        *zoom: 1;
+      }
+
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  </head>
+  <body id="">
+    <div class="main">
+      <header class="main-header">
+        <h1 class="main-logotype">
+          <a href="/">
+            {Title}
+          </a>
+        </h1>
+        <nav class="main-nav">
+            <ul class="main-nav-list">
+              {block:HasPages}
+                  {block:Pages}
+                    <li class="main-nav-item">
+                      <a class="main-nav-link" href="{URL}">
+                        {Label}
+                      </a>
+                    </li>
+                  {/block:Pages}
+              {/block:HasPages}
+              <li class="main-nav-item">
+                <a class="main-nav-link" href="/ask">
+                  Ask
+                </a>
+              </li>              
+              <li class="main-nav-item">
+                <a class="main-nav-link" href="http://twitter.com/vincentiadevaia" target="_blank">
+                  Twitter
+                </a>
+              </li>
+            </ul>
+        </nav>
+
+        <hr class="main-rule">
+
+        <nav class="main-menu">
+          <ul class="main-menu-list">
+            <li class="main-menu-item">
+              <a href="/tagged/fantastic+four">
+                Fantastic Four
+              </a>
+            </li>
+            <li class="main-menu-item">
+              <a href="/tagged/strange+tales">
+                Strange Tales
+              </a>
+            </li>
+            <li class="main-menu-item">
+              <a href="/tagged/mister+miracle">
+                Mister Miracle
+              </a>
+            </li>
+            <li class="main-menu-item">
+              <a href="/tagged/marvel">
+                Marvel
+              </a>
+            </li>
+            <li class="main-menu-item">
+              <a href="/tagged/DC">
+                DC
+              </a>
+            </li>
+            <li class="main-menu-item">
+              <a href="/tagged/60s">
+                Sixties
+              </a>
+            </li>      
+            <li class="main-menu-item">
+              <a href="/tagged/70s">
+                Seventies
+              </a>
+            </li>
+            <li class="main-menu-item">
+              <a href="/tagged/80s">
+                Eighties
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+
+      <div class="body post">
+        {block:IndexPage} 
+          {block:Posts}
+            <ul class="posts-list">
+
+              {block:Text}
+                <li class="posts-item">
+                  {block:Title}
+                    {Title}
+                  {/block:Title}
+                </li>
+              {/block:Text}
+
+              {block:Photo}
+                <li class="posts-item">
+                  <a href="{Permalink}">
+                    <img class="posts-item-image" src="{PhotoURL-250}"  alt="{PhotoAlt}"/>
+                    {block:Caption}
+                      {Caption}
+                    {/block:Caption}
+                  </a>
+                </li>
+              {/block:Photo}
+
+            </ul>
+          {/block:Posts}
+
+<!--        <div class="pagination">
+          {block:Pagination}
+            {NextPage}
+            [{CurrentPage}/{TotalPages}]
+            {PreviousPage}
+          {/block:Pagination}
+        </div>
+-->
+        {/block:IndexPage}
+        
+
+        {block:PermalinkPage}
+          {block:Posts}
+
+            {block:Pages}
+              {block:Text}
+                <div class="post-text">
+                  {block:Title}
+                    {Title}
+                  {/block:Title}
+
+                  {Body}
+                </div>
+              {/block:Text}
+            {/block:Pages}
+
+            {block:Photo}
+              <div class="post-image">
+                <a class="post-image-link" href="{Permalink}">
+                  <img class="post-image-src" src="{PhotoUrl-HighRes}" alt="{PhotoAlt}"/>
+                </a>
+                {block:Caption}
+                  {Caption}
+                {/block:Caption}
+
+                {block:HasTags}
+                  <ul class="post-tags">
+                      <li class="post-tags-item">
+                        Tags: 
+                      </li>                    
+                      {block:Tags}
+                        <li class="post-tags-item">
+                            <a class="post-tags-link" href="{TagURL}">{Tag}</a>
+                        </li>
+                      {/block:Tags}
+                  </ul>
+                {/block:HasTags}
+                <p class="post-notes-count">
+                  {block:NoteCount}
+                    {NoteCountWithLabel}
+                  {/block:NoteCount}
+                </p>
+              </div>
+            {/block:Photo}
+
+          {/block:Posts}
+        {/block:PermalinkPage}
+
+        </div>
+      <section id="js-post" class="posts-section clearfix"></section>
+      <footer class="footer clearfix">
+        <ul class="footer-nav">
+          <li class="footer-nav-item">
+            Theme by
+            <a href="http://maty.us">
+              <a href="http://closeencountersofthenewyorkkind.com">Close Encounters of the New York Kind</a>
+            </a>
+          </li>
+        </ul>
+      </footer>
+    </div>
+  </body>
+</html>
