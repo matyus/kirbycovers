@@ -243,41 +243,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script>
     $(document).ready(function(){
-      console.log('ready');
-
        var location = document.location.href,
-           index = 1,
-           nextPage;
+           index = 2,
+           nextPage = 'page/2';
              
-      $(window).on('click',function(){
-        console.log('load more');
-        loadMore();
-      }).scroll(function(){
+      $(window).scroll(function(){
         if($(window).scrollTop() + $(window).height() == $(document).height()) {
           loadMore();
         }
       });
 
       var loadMore = function(){
-        console.log('nextPage:',nextPage);
-        console.log('window.location:',window.location.href);
-
-        if ( index <= 1 ){
-          if ( location.charAt( location.length - 1 ) == '/' ){
-            nextPage = 'page/2';
-          }
-        }
-
         $.get(window.location.href + nextPage, function(data){
           console.log('loaded', index, nextPage);
           nextPage = nextPage.replace('page/'+index, 'page/'+ ++index);
           console.log('nextPage',nextPage);
-          console.log(data, $(data).find('.posts-item'));
           $('#posts').append($(data).find('.posts-item'));
         });
-
       }
-
     });
     </script>
   </head>
@@ -385,20 +368,9 @@
               {/block:Photo}
             {/block:Posts}
           </ul>
-            <div id="more"></div>
-
-<!--    HAVENT FIGURED THIS OUT YET    
-        <div class="pagination">
-          {block:Pagination}
-            {NextPage}
-            [{CurrentPage}/{TotalPages}]
-            {PreviousPage}
-          {/block:Pagination}
-        </div>
--->
+          <div id="more"></div>
         {/block:IndexPage}
         
-
         {block:PermalinkPage}
           {block:Posts}
 
