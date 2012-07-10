@@ -254,11 +254,14 @@
       });
 
       var loadMore = function(){
-        $.get(window.location.href + nextPage, function(data){
-          console.log('loaded', index, nextPage);
+        var location = window.location.href;
+
+        location = (location.charAt(location.length - 1) != '/') ? location += '/' : location;
+
+        $.get(location + nextPage, function(data){
           nextPage = nextPage.replace('page/'+index, 'page/'+ ++index);
-          console.log('nextPage',nextPage);
-          $('#posts').append($(data).find('.posts-item'));
+          location = location.split('page')[0];
+          $('.posts-list').append($(data).find('.posts-item'));
         });
       }
     });
@@ -368,7 +371,6 @@
               {/block:Photo}
             {/block:Posts}
           </ul>
-          <div id="more"></div>
         {/block:IndexPage}
         
         {block:PermalinkPage}
